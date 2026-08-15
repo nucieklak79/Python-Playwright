@@ -2,15 +2,15 @@ pipeline {
     agent any
 
     stages {
-        stage('Pobranie kodu') {
+        stage('Downloading the code') {
             steps {
                 checkout scm
             }
         }
 
-        stage('Przygotowanie środowiska') {
+        stage('Preparing the environment') {
             steps {
-                // Aktywujemy środowisko i instalujemy pakiety
+                
                 sh '''
                     python3 -m venv venv
                     . venv/bin/activate
@@ -19,9 +19,9 @@ pipeline {
             }
         }
 
-        stage('Instalacja przeglądarek Playwright') {
+        stage('Installing Playwright browsers') {
             steps {
-                // Instalujemy Chromium ze wszystkimi zależnościami systemowymi Linuksa
+                
                 sh '''
                     . venv/bin/activate
                     playwright install --with-deps chromium
@@ -29,9 +29,9 @@ pipeline {
             }
         }
 
-        stage('Uruchomienie testów E2E') {
+        stage('Running E2E tests') {
             steps {
-                // Uruchamiamy testy i generujemy raport XML dla Jenkinsa
+                
                 sh '''
                     . venv/bin/activate
                     pytest --junitxml=test-results/results.xml
@@ -42,7 +42,7 @@ pipeline {
 
     post {
         always {
-            // Ten krok wykona się zawsze, rysując wykresy z wynikami testów
+            
             junit 'test-results/results.xml'
         }
     }
