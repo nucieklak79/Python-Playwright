@@ -1,8 +1,4 @@
 from playwright.sync_api import Page, expect
-from pages.login_page import LoginPage
-from pages.inventory_page import InventoryPage
-from pages.cart_page import CartPage
-from pages.checkout_page import CheckoutPage
 
 def test_full_checkout_flow(login_page, inventory_page, cart_page, checkout_page):
     

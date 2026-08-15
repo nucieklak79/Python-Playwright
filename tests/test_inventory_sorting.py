@@ -4,10 +4,8 @@ from pages.login_page import LoginPage
 from pages.inventory_page import InventoryPage
 
 @pytest.mark.parametrize("sort_option", ["az", "za", "lohi", "hilo"])
-def test_inventory_sorting(page: Page, sort_option: str):
+def test_inventory_sorting(login_page, inventory_page, sort_option: str):
     # Arrange
-    login_page = LoginPage(page)
-    inventory_page = InventoryPage(page)
     login_page.navigate()
     login_page.login("standard_user", "secret_sauce")
 
